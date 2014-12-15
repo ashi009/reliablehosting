@@ -1,0 +1,18 @@
+{
+  "name": "reliablehosting",
+  "version": "1.0.0",
+  "description": "Speed test over all reliablehosting vpn servers",
+  "main": "index.js",
+  "author": "Xiaoyi Shi <ashi009@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^0.9.0",
+    "chalk": "^0.5.1",
+    "fast-html-parser": "^1.0.0",
+    "fast-stats": "0.0.2",
+    "net-ping": "^1.1.11",
+    "progress": "^1.1.8",
+    "request": "^2.51.0",
+    "tough-cookie": "^0.12.1"
+  }
+}
