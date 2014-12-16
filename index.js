@@ -70,11 +70,31 @@ var kJobs = {
     }, function(err, res, body) {
       if (err)
         return callback(err);
-      var match = /change_server\/([0-9a-f]+)/.exec(body);
-      if (!match)
+      var root = htmlParser.parse(body);
+      var elAccounts = root.querySelectorAll('.account-panel');
+      var accounts = [];
+      var pattern = /change_server\/([0-9a-f]+)/;
+      for (var i = 0; i < elAccounts.length; i++) {
+        var elHeader = elAccounts[i].querySelector('.panel-heading').removeWhitespace();
+        var elChangeServerBtn = elAccounts[i].querySelector('.btn-change-server');
+        if (elChangeServerBtn) {
+          accounts.push({
+            name: format('%s (%s)', elHeader.childNodes[0].text, elHeader.childNodes[1].text),
+            value: pattern.exec(elChangeServerBtn.attributes.href)[1]
+          });
+        }
+      }
+      if (accounts.length === 0)
         return callback(new Error('Something went wrong'));
-      log('%s %s\n', chalk.green('OK'), match[1]);
-      callback(null, match[1]);
+      inquirer.prompt([{
+        type: 'list',
+        name: 'account',
+        message: 'Chose account:',
+        choices: accounts
+      }], function(answers) {
+        log('%s %s\n', chalk.green('OK'), answers.account);
+        callback(null, answers.account);
+      });
     });
   }],
   servers: ['accountHash', function(callback, results) {
@@ -227,7 +247,7 @@ var kJobs = {
           lhs.err - rhs.err ||
           lhs.rtt - rhs.rtt;
     });
-    log('%s\t%s\t%s\t%s\t%s\n',
+    log('%s\t%s\t%s\t%s\n',
         'id',
         'location',
         'err',
