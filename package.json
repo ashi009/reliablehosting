@@ -10,6 +10,7 @@
     "chalk": "^0.5.1",
     "fast-html-parser": "^1.0.0",
     "fast-stats": "0.0.2",
+    "inquirer": "^0.8.0",
     "net-ping": "^1.1.11",
     "progress": "^1.1.8",
     "request": "^2.51.0",
