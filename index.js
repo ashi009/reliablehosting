@@ -299,5 +299,5 @@ cacheWrapper(kJobs, ['login', 'accountHash', 'servers']);
 async.auto(kJobs, function(err, results) {
   if (err)
     log('%s\n', chalk.red('Error'),  err);
-  log('all done.');
+  log('all done.\n');
 });
