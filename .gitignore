@@ -13,3 +13,7 @@ node_modules
 !.gitignore
 
 *.sublime-*
+
+config.json
+cache.json
+
